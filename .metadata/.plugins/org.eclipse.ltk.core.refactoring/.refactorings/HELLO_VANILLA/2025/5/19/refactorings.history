@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;hello.js&apos; to &apos;hello.js&apos;&#x0D;&#x0A;- Original project: &apos;HELLO_VANILLA&apos;&#x0D;&#x0A;- Destination element: &apos;hello.js&apos;&#x0D;&#x0A;- Original element: &apos;hello.js&apos;" description="Copy file" element1="hello.js" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1746775645101" target="/HELLO_VANILLA/hello.js" units="0" version="1.0"/>
-</session>
