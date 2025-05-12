@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#it{
+    width: 40px;
+}
+</style>
+</head>
+<body>
+<table border="1px">
+    <tr>
+        <td>출력단수</td>
+        <td>
+            <input type="text" id="it">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="button" id="출력하기" value="출력하기">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <textarea id="ta" rows="13" cols="17"></textarea>
+        </td>
+    </tr>
+</table>
+<script>
+    let dap = document.getElementById("ta");
+    const dapBtn = document.getElementById("출력하기");
+
+    function gugudan() {
+        dapBtn.addEventListener("click", () =>{
+            gugu();
+        })
+    }
+
+    function gugu() {
+        let dan = document.getElementById("it");
+        dap.value ="";
+
+        for(let i=1; i<=9; i++) {
+            let fullGugu = `${dan.value} * ${i} = ${dan.value * i}\n`;
+            dap.value += fullGugu;
+        }
+        console.log(dap.value);
+    }
+    gugudan();
+</script>
+</body>
+</html>
