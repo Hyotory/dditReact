@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<span id="myspan">Good Morning</span>
+<button>CLICK</button>
+<script>
+    function change() {
+        const clickBtn = document.querySelector("button");
+        const greetings = document.getElementById("myspan");
+        console.log(greetings);
+        const originalGreetings = greetings.innerHTML;
+        console.log(originalGreetings);
+        const changedGreetings = "Good Evening!";
+
+        let isOriginal = true;
+        clickBtn.addEventListener("click", function (){
+            if(isOriginal){
+                greetings.innerHTML = changedGreetings;
+            } else {
+                greetings.innerHTML = originalGreetings;
+            }
+            isOriginal = !isOriginal;
+        });
+    }
+    document.addEventListener("DOMContentLoaded", change);
+</script>
+</body>
+</html>
