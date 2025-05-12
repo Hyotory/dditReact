@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>#it{
+    width: 30px;
+}
+</style>
+</head>
+<body>
+<input type="text" id="it" value="100">
+<button>INCREASE</button>
+
+<script>
+function myClick() {
+    const button = document.querySelector("button");
+    button.onclick = () => {
+        const input = document.getElementById("it");
+        input.value = parseInt(input.value) + 1;
+    }
+}
+document.addEventListener("DOMContentLoaded", myClick);
+</script>
+</body>
+</html>

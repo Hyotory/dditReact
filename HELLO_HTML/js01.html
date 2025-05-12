@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<span id="myspan">Good Morning</span>
+<button>CLICK</button>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const mySpan = document.getElementById("myspan");
+    const button = document.querySelector("button");
+    button.onclick = () => {
+        mySpan.textContent = "Good Evening";
+    }
+});
+
+</script>
+</body>
+</html>

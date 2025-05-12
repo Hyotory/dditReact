@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<table border="1px">
+    <tr>
+        <td><span class="myspan">-</span></td>
+        <td><span class="myspan">-</span></td>
+        <td><span class="myspan">-</span></td>
+        <td><span class="myspan">-</span></td>
+        <td><span class="myspan">-</span></td>
+        <td><span class="myspan">-</span></td>
+    </tr>
+    <tr>
+        <td colspan="6">
+            <button>로또생성하기</button>
+        </td>
+    </tr>
+</table>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const mySpan = document.querySelectorAll("span.myspan");
+        const button = document.querySelector("button");
+        button.onclick = () => {
+
+            function generateLotNumber() {
+                const numbers = [];
+                while(numbers.length < 6) {
+                    const num = Math.floor(Math.random() * 45) + 1;
+                    if(!numbers.includes(num)) {
+                        numbers.push(num);
+                    }
+                }
+                return numbers.sort((a, b) => a - b);
+                console.log(generateLotNumber());
+                 mySpan.forEach((mySpan, index) => {
+                if (index < numbers.length) {
+                    mySpan.innerText = numbers[index];
+                }
+
+
+
+
+
+
+    });
+
+</script>
+</body>
+</html>
