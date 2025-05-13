@@ -18,31 +18,32 @@
             const start = document.getElementById("it_first").value;
             const end = document.getElementById("it_last").value;
             console.log(start, end);
-            let err = end - start <= 0;
-            if(!err) {
-            starStack(start, end);
-            } else{
+
+            if(end - start < 0) {
                 alert("첫 별 수는 끝 별 수보다 작아야합니다!")
+                return;
             }
+            mydiv.innerHTML = "";
+            starStack(start, end);
+
         }
         function starStack(start, end) {
-            let line = '';
+            let result = '';
             let lines = end - start + 1;
-            let starts = start;
+            let starCount = start;
+
             console.log("총 줄 수 : ",lines);
+
             for(let i = 0; i < lines; i++) {
-                line += "<br/>"
-
-                for(let j = 0; j < starts; j++) {
-                    line += "*";
+                for(let j = 0; j < starCount; j++) {
+                    result += "★";
                 }
-                starts++;
+                result += "<br/>"
+                starCount++;
             }
-            mydiv.innerHTML += line+"<br/>";
+            mydiv.innerHTML += result;
             console.log(mydiv);
-
         }
-        starStack();
     })
 </script>
 </head>

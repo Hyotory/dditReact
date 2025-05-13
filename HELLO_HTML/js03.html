@@ -27,26 +27,28 @@
             <textarea id="ta" rows="13" cols="17"></textarea>
         </td>
     </tr>
-
 </table>
 <script>
-document.addEventListener("DOMContentLoaded", myClick);
+    let dap = document.getElementById("ta");
+    const dapBtn = document.getElementById("출력하기");
 
-function myClick() {
-    const printBtn = document.getElementById("출력하기");
-    const ta = document.getElementById("ta");
-
-    printBtn.onclick = () => {
-        ta.value = "";
-        const danValue = document.getElementById("it").value;
-        let guguDan = "";
-        for(let i = 1; i <= 9; i ++) {
-            guguDan = `${danValue} * ${i} = ${danValue*i}\n`;
-            console.log("danValue: ",danValue);
-            ta.value += guguDan;
-        }
+    function gugudan() {
+        dapBtn.addEventListener("click", () =>{
+            gugu();
+        })
     }
-}
+
+    function gugu() {
+        let dan = document.getElementById("it");
+        dap.value ="";
+
+        for(let i=1; i<=9; i++) {
+            let fullGugu = `${dan.value} * ${i} = ${dan.value * i}\n`;
+            dap.value += fullGugu;
+        }
+        console.log(dap.value);
+    }
+    gugudan();
 </script>
 </body>
 </html>

@@ -8,14 +8,25 @@
 <span id="myspan">Good Morning</span>
 <button>CLICK</button>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const mySpan = document.getElementById("myspan");
-    const button = document.querySelector("button");
-    button.onclick = () => {
-        mySpan.textContent = "Good Evening";
-    }
-});
+    function change() {
+        const clickBtn = document.querySelector("button");
+        const greetings = document.getElementById("myspan");
+        console.log(greetings);
+        const originalGreetings = greetings.innerHTML;
+        console.log(originalGreetings);
+        const changedGreetings = "Good Evening!";
 
+        let isOriginal = true;
+        clickBtn.addEventListener("click", function (){
+            if(isOriginal){
+                greetings.innerHTML = changedGreetings;
+            } else {
+                greetings.innerHTML = originalGreetings;
+            }
+            isOriginal = !isOriginal;
+        });
+    }
+    document.addEventListener("DOMContentLoaded", change);
 </script>
 </body>
 </html>

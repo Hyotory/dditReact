@@ -7,21 +7,22 @@
     width: 30px;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 <input type="text" id="it" value="100">
 <button id="btn">INCREASE</button>
 <script>
-    function addNumber() {
-        let number = ("#it").html().val;
-        number++;
-    }
+function addNumber() {
+    let num =  parseInt($("#it").val());
     $(document).ready(function(){
         $("#btn").on("click", () => {
-            addNumber();
+        num++;
+        $("#it").val(num);
         });
     });
-    document.addEventListener("DOMContentLoaded", addNumber);
+}
+    addNumber();
 </script>
 </body>
 </html>

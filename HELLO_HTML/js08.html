@@ -20,16 +20,26 @@ document.addEventListener("DOMContentLoaded", function() {
 const btnCall = document.getElementById("btn_call");
 const btns = document.querySelectorAll(".btn");
 let it = document.getElementById("it");
+console.log(it);
 btns.forEach(btn => {
-    let line = '';
     btn.addEventListener("click", () => {
       console.log("클릭되었습니다." + btn.value);
-      line += btn.value;
-      it.innerHTML = line;
+      const currentNum = it.value;
+      if(currentNum.length === 3 ) {
+          it.value += "-";
+      }else if(currentNum.length === 8){
+          it.value += "-";
+      }
+      it.value += btn.value;
     })
 })
-    console.log(btns);
-
+    btnCall.addEventListener("click", () => {
+        if(it.value.length > 0) {
+            alert("Calling...");
+        } else{
+           alert("번호를 입력하세요");
+        }
+    })
 })
 </script>
 </head>

@@ -7,12 +7,12 @@
 <body>
 <table border="1px">
     <tr>
-        <td><span class="myspan">-</span></td>
-        <td><span class="myspan">-</span></td>
-        <td><span class="myspan">-</span></td>
-        <td><span class="myspan">-</span></td>
-        <td><span class="myspan">-</span></td>
-        <td><span class="myspan">-</span></td>
+        <td><span class="myspan">_</span></td>
+        <td><span class="myspan">_</span></td>
+        <td><span class="myspan">_</span></td>
+        <td><span class="myspan">_</span></td>
+        <td><span class="myspan">_</span></td>
+        <td><span class="myspan">_</span></td>
     </tr>
     <tr>
         <td colspan="6">
@@ -21,33 +21,32 @@
     </tr>
 </table>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const mySpan = document.querySelectorAll("span.myspan");
-        const button = document.querySelector("button");
-        button.onclick = () => {
+    const slot = document.querySelectorAll(".myspan");
+    console.log(slot);
 
-            function generateLotNumber() {
-                const numbers = [];
-                while(numbers.length < 6) {
-                    const num = Math.floor(Math.random() * 45) + 1;
-                    if(!numbers.includes(num)) {
-                        numbers.push(num);
-                    }
-                }
-                return numbers.sort((a, b) => a - b);
-                console.log(generateLotNumber());
-                 mySpan.forEach((mySpan, index) => {
-                if (index < numbers.length) {
-                    mySpan.innerText = numbers[index];
-                }
+    document.querySelector("button").addEventListener("click", () => {
+        let lottArr = [];
 
+        while(lottArr.length < 6){
+            let lottNumber = Math.floor(Math.random()*45) + 1;
 
+            if(!lottArr.includes(lottNumber)){
+                lottArr.push(lottNumber);
+            }
+        }
+        lottArr.sort((a,b) => a-b);
+        console.log(lottArr);
 
+        // for(let i = 0; i< 6; i++) {
+        //     slot[i].innerHTML = lottArr[i];
+        // }
 
+        // slot.forEach((element,index) => {
+        //     element.innerHTML = lottArr[index];
+        // });
 
-
-    });
-
+        slot.forEach((element,index) => element.innerHTML = lottArr[index]);
+    })
 </script>
 </body>
 </html>
