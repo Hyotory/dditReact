@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+    #it_first, #it_last {
+        width: 50px;
+    }
+    #mydiv {
+        height: 150px;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const mydiv = document.getElementById("mydiv");
+        document.querySelector("#btn").onclick = function() {
+            const start = document.getElementById("it_first").value;
+            const end = document.getElementById("it_last").value;
+            console.log(start, end);
+            let err = end - start <= 0;
+            if(!err) {
+            starStack(start, end);
+            } else{
+                alert("첫 별 수는 끝 별 수보다 작아야합니다!")
+            }
+        }
+        function starStack(start, end) {
+            let line = '';
+            let lines = end - start + 1;
+            let starts = start;
+            console.log("총 줄 수 : ",lines);
+            for(let i = 0; i < lines; i++) {
+                line += "<br/>"
+
+                for(let j = 0; j < starts; j++) {
+                    line += "*";
+                }
+                starts++;
+            }
+            mydiv.innerHTML += line+"<br/>";
+            console.log(mydiv);
+
+        }
+        starStack();
+    })
+</script>
+</head>
+<body>
+<table border="1px">
+    <tr>
+        <td>첫 별 수 </td>
+        <td>
+            <input type="text" id="it_first">
+        </td>
+    </tr>
+    <tr>
+        <td>끝 별 수 </td>
+        <td>
+            <input type="text" id="it_last">
+        </td>
+    </tr>
+    <tr>
+        <td colspan = "2">
+            <button id="btn">별 출력하기</button>
+        </td>
+    </tr>
+    <tr>
+        <td colspan = "2">
+            <div id="mydiv"></div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

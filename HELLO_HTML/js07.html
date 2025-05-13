@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#it {
+    width: 30px;
+}
+#mydiv {
+    height: 150px;
+}
+</style>
+<script>
+let ran = parseInt(Math.random()*99)+1;
+function myclick() {
+    let mine = parseInt(Math.random()*99)+1;
+    console.log(mine);
+    const it = document.getElementById("it");
+    const mydiv = document.getElementById("mydiv");
+    console.log(ran);
+    it.value = ran;
+
+    let line = "";
+    if(ran === mine) {
+        line += mine + "\t"+ "정답<br/>";
+        alert("정답");
+    } else if(ran > mine) {
+        line += mine+ "\t"+" 내가 작다<br/>";
+    } else {
+        line += mine+ "\t"+" 내가 크다<br/>";
+    }
+    mydiv.innerHTML += line;
+}
+</script>
+</head>
+<body>
+<table border ="1px">
+    <tr>
+        <td>맞출 수</td>
+        <td>
+            <input type="text" id="it">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="button" onclick="myclick()" value="맞춰보기">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div id="mydiv"></div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

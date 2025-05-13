@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style>
+#it {
+    width: 30px;
+}
+#mydiv {
+    height: 150px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+function myclick() {
+    $("#myspan").html("Good Evening");
+}
+$(document).ready(function(){
+    $("#btn").on("click", function() {
+        myclick();
+    });
+});
+</script>
+</head>
+<body>
+<span id="myspan">Good Morning</span>
+<button id="btn">CLICK</button>
+</body>
+</html>

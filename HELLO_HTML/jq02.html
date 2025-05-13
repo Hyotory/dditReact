@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>#it{
+    width: 30px;
+}
+</style>
+</head>
+<body>
+<input type="text" id="it" value="100">
+<button id="btn">INCREASE</button>
+<script>
+    function addNumber() {
+        let number = ("#it").html().val;
+        number++;
+    }
+    $(document).ready(function(){
+        $("#btn").on("click", () => {
+            addNumber();
+        });
+    });
+    document.addEventListener("DOMContentLoaded", addNumber);
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+#it {
+    width: 100px;
+}
+.btn {
+    width: 32px;
+}
+#btn_call {
+    width: 70px;
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+const btnCall = document.getElementById("btn_call");
+const btns = document.querySelectorAll(".btn");
+let it = document.getElementById("it");
+btns.forEach(btn => {
+    let line = '';
+    btn.addEventListener("click", () => {
+      console.log("클릭되었습니다." + btn.value);
+      line += btn.value;
+      it.innerHTML = line;
+    })
+})
+    console.log(btns);
+
+})
+</script>
+</head>
+<body>
+<table border ="1px">
+        <tr>
+            <td colspan="3">
+                <input type="text" id="it" />
+            </td>
+        </tr>
+        <tr>
+            <td><input type="button" value="1" class="btn" /></td>
+            <td><input type="button" value="2" class="btn" /></td>
+            <td><input type="button" value="3" class="btn" /></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="4" class="btn" /></td>
+            <td><input type="button" value="5" class="btn" /></td>
+            <td><input type="button" value="6" class="btn" /></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="7" class="btn" /></td>
+            <td><input type="button" value="8" class="btn" /></td>
+            <td><input type="button" value="9" class="btn" /></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="0" class="btn" /></td>
+            <td colspan="2">
+                <input type="button" value="☎" id="btn_call"  />
+            </td>
+        </tr>
+</table>
+</body>
+</html>
