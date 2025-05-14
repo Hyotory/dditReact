@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+    #it{
+        width: 40px;
+    }
+    #mydiv{
+        height: 170px;
+    }
+</style>
+</head>
+<body>
+<table border="1px">
+    <tr>
+        <td>맞출 수</td>
+        <td>
+            <input type="text" id="it">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="button" onclick="myclick()" value="맞춰보기">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div id="mydiv"></div>
+        </td>
+    </tr>
+</table>
+<script>
+    // 1~ 9의 수 중에서 중복 없이 3개 선택
+    // com = 123
+    // my = 321 일 때
+    // 자리수가 같으면 strike, 자리수가 다르면 ball -> 1S2B
+    // 오답 누적 출력하여 정답 유도하기
+    // 3 strike 나오면 정답 처리 -> alert (정답숫자+축하합니다!)
+    window.onload = () => {
+        const com = parseInt(Math.random() * 900) + 100;
+        console.log(com);
+        let comArr = [];
+        comArr = com.split("");
+        console.log(comArr);
+    }
+
+        function myclick() {
+            const my = document.getElementById("it");
+            console.log(my);
+            let myVal = my.value.trim();
+            console.log(myVal);
+
+            if(myVal.length > 3) {
+                alert(" 숫자 3자리만 입력 가능");
+                return;
+            }
+            let myValArr = [];
+            myValArr = myVal.split("");
+            let numArr = myValArr.map(Number);
+            console.log(myValArr);
+            console.log(numArr);
+
+
+
+
+
+
+
+        }
+</script>
+</body>
+</html>

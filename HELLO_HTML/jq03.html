@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#it{
+    width: 40px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+<table border="1px">
+    <tr>
+        <td>출력단수</td>
+        <td>
+            <input type="text" id="it">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="button" id="btn" value="출력하기">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <textarea id="ta" rows="13" cols="17"></textarea>
+        </td>
+    </tr>
+</table>
+<script>
+    let dap = document.getElementById("ta");
+
+    function gugudan() {
+        $("#btn").on("click", () =>{
+            gugu();
+        })
+    }
+
+    function gugu() {
+        let dan = $("#it").val();
+        let idan = parseInt(dan);
+        let txt = "";
+
+        for(let i=1; i<=9; i++) {
+           txt += dan + "*" + i + "=" + (idan * i)+ "\n";
+        }
+        $("#ta").val(txt);
+    }
+    gugudan();
+</script>
+</body>
+</html>
