@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 <table border="1px">
@@ -21,31 +22,24 @@
     </tr>
 </table>
 <script>
-    const slot = document.querySelectorAll(".myspan");
-    console.log(slot);
+    $(document).ready(function () {
+        $("button").click(function () {
+            let lottArr = [];
 
-    document.querySelector("button").addEventListener("click", () => {
-        let lottArr = [];
+            while(lottArr.length < 6){
+                let lottNumber = Math.floor(Math.random()*45) + 1;
 
-        while(lottArr.length < 6){
-            let lottNumber = Math.floor(Math.random()*45) + 1;
-
-            if(!lottArr.includes(lottNumber)){
-                lottArr.push(lottNumber);
+                if(!lottArr.includes(lottNumber)){
+                    lottArr.push(lottNumber);
+                }
             }
-        }
-        lottArr.sort((a,b) => a-b);
-        console.log(lottArr);
+            lottArr.sort((a,b) => a-b);
+            console.log(lottArr);
 
-        // for(let i = 0; i< 6; i++) {
-        //     slot[i].innerHTML = lottArr[i];
-        // }
-
-        // slot.forEach((element,index) => {
-        //     element.innerHTML = lottArr[index];
-        // });
-
-        slot.forEach((element,index) => element.innerHTML = lottArr[index]);
+            $(".myspan").each(function(index) {
+                $(this).text(lottArr[index]);
+            })
+        })
     })
 </script>
 </body>

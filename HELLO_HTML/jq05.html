@@ -3,25 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
 .its{
     width: 30px;
 }
 </style>
 <script>
-function myclick() {
-    const obj_nums = document.querySelectorAll(".its");
-    console.log(obj_nums[1].value);
-    const a = obj_nums[0].value;
-    const b = obj_nums[1].value;
+$(document).ready(function() {
+    function myclick() {
+        const a = $(".its").eq(0).val();
+        const b = $(".its").eq(1).val();
 
-    const aa = parseInt(a);
-    const bb = parseInt(b);
+        const aa = parseInt(a);
+        const bb = parseInt(b);
 
-    let mul = aa * bb;
+        let mul = aa * bb;
 
-    obj_nums[2].value =  mul;
-}
+        $(".its").eq(2).val(mul);
+    }
+
+    $("button").click(function () {
+        myclick();
+    })
+
+});
 </script>
 </head>
 <body>

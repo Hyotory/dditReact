@@ -3,33 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
 #it_mine, #it_com, #it_result {
     width: 30px;
 }
 </style>
 <script>
-function myclick() {
-let numb = parseInt(Math.random()*2);
-let mine= document.getElementById("it_mine").value;
-console.log(mine);
-if(mine > 1 || mine < 0 || mine === null){
-    alert("0 또는 1만 입력 가능");
-    return;
-}
+$(document).ready(function() {
 
-let com = document.getElementById("it_com").value = numb;
-let res = document.getElementById("it_result");
-if(com == mine) {
-    res.value = "이김";
-} else {
-    res.value = "짐";
-}
+    function myclick() {
+        let numb = parseInt(Math.random()*2);
+        let mine= $("#it_mine").val();
+        console.log(mine);
 
+        if(mine > 1 || mine < 0 || mine === ""){
+            alert("0 또는 1만 입력 가능");
+            return;
+        }
 
+        $("#it_com").val(numb);
 
-console.log(numb);
-}
+        if(numb == mine) {
+            $("#it_result").val("이김")
+        } else {
+            $("#it_result").val("짐")
+        }
+        console.log(numb);
+    }
+
+    $("input[type='button']").click(function () {
+        myclick();
+    })
+})
 </script>
 </head>
 <body>
@@ -54,7 +60,7 @@ console.log(numb);
     </tr>
     <tr>
         <td colspan="2">
-            <input type="button" onclick="myclick()"  value="게임하기">
+            <input type="button" value="게임하기">
         </td>
     </tr>
 

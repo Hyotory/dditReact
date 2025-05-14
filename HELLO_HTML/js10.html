@@ -38,37 +38,87 @@
     // 자리수가 같으면 strike, 자리수가 다르면 ball -> 1S2B
     // 오답 누적 출력하여 정답 유도하기
     // 3 strike 나오면 정답 처리 -> alert (정답숫자+축하합니다!)
+    let coms = [];
+    let mine = [];
+    let mydiv = document.getElementById("mydiv");
+    console.log(mydiv);
+    let comNum = 0;
     window.onload = () => {
-        const com = parseInt(Math.random() * 900) + 100;
-        console.log(com);
-        let comArr = [];
-        comArr = com.split("");
-        console.log(comArr);
+            generateComs();
+            mydiv.innerHTML = '';
     }
 
-        function myclick() {
-            const my = document.getElementById("it");
-            console.log(my);
-            let myVal = my.value.trim();
-            console.log(myVal);
+    function generateComs() {
+        const nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        let firstNum = Math.floor(Math.random() * 9) + 1;
+        console.log(firstNum);
+        coms.push(nums[firstNum].toString());
+        console.log(coms);
+        nums.splice(firstNum, 1);
+        console.log("1번째 자리 숫자 추가 후 nums",nums);
 
-            if(myVal.length > 3) {
-                alert(" 숫자 3자리만 입력 가능");
+        for(let i = 0; i < 2; i++) {
+            let index = Math.floor(Math.random() * nums.length);
+            console.log(index);
+            coms.push(nums[index].toString());
+            nums.splice(index, 1);
+            console.log(`${i+2}번째 자리 숫자 추가 후 nums ${nums}`);
+        }
+        console.log("완전체 coms",coms);
+        comNum = coms.join('');
+        console.log(comNum);
+    }
+
+    function myclick() {
+        let my = document.getElementById("it");
+        console.log("my",my);
+
+        let myVal = my.value.trim();
+        console.log("myVal",myVal);
+
+        mine = myVal.split('');
+        console.log("mine",mine);
+
+        if(isNaN(Number(myVal)) || myVal.length !== 3 ) {
+            alert(" 정수 3자리만 입력 가능");
+            my.value= "";
+            my.focus();
+            return;
+        }
+        let uniqueTest = new Set(mine);
+        for(let i = 0; i < 2; i++) {
+            if(uniqueTest.size !== 3) {
+                alert("같은 숫자 입력 불가능");
+                my.value= "";
+                my.focus();
                 return;
             }
-            let myValArr = [];
-            myValArr = myVal.split("");
-            let numArr = myValArr.map(Number);
-            console.log(myValArr);
-            console.log(numArr);
-
-
-
-
-
-
-
         }
+        result();
+    }
+
+
+    function result() {
+        let strike = 0;
+        let ball = 0;
+        for(let i = 0; i < 3; i++) {
+            if(coms[i] === mine[i]) {
+                strike ++;
+            }
+        }
+
+        for(let i = 0; i < 3; i++) {
+            if(coms.includes(mine[i]) && coms[i] !== mine[i] ) {
+                ball ++;
+            }
+        }
+
+        if(strike ===  3) {
+            alert(`${comNum} 정답입니다!`);
+        }
+        mydiv.innerHTML += `${strike}S ${ball}B<br>`;
+    }
+
 </script>
 </body>
 </html>
