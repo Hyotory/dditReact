@@ -49,6 +49,21 @@
     }
 
     function generateComs() {
+
+        /*
+        let com = "123";
+        야바위법으로 숫자생성
+        let arr9 = [1,2,3,4,5,6,7,8,9];
+        for(let i=0; i<1000; i++){
+            let rnd = partInt(Math.random()*9);
+            let temp = arr9[0];
+            arr9[0] = arr9[rnd];
+            arr9[rnd] = temp;
+        }
+
+        com = arr9[0] + "" + arr9[1] + "" + arr9[2];
+         */
+
         const nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         let firstNum = Math.floor(Math.random() * 9) + 1;
         console.log(firstNum);
@@ -95,6 +110,8 @@
             }
         }
         result();
+        my.value= "";
+        my.focus();
     }
 
 
@@ -108,15 +125,18 @@
         }
 
         for(let i = 0; i < 3; i++) {
-            if(coms.includes(mine[i]) && coms[i] !== mine[i] ) {
+            if(coms[i] !== mine[i] ) {
                 ball ++;
             }
         }
 
         if(strike ===  3) {
+            setTimeout(() => {
             alert(`${comNum} 정답입니다!`);
+            }, 1000);
         }
-        mydiv.innerHTML += `${strike}S ${ball}B<br>`;
+        myNum = mine.join('');
+        mydiv.innerHTML += `${myNum} ${strike}S ${ball}B<br>`;
     }
 
 </script>

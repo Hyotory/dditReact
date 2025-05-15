@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+    table {
+        border-spacing: 0;
+        border-collapse: collapse; /* 셀 간격을 없애는 핵심 속성 */
+        margin: 0;
+        padding: 0;
+    }
+    td{
+        padding: 0; /* 셀 내부 간격 제거 */
+        margin: 0;
+        font-size: 0; /* 텍스트 노드로 인한 간격 제거 */
+        line-height: 0; /* 행 높이로 인한 간격 제거 */
+    }
+    tr{
+        padding: 0;
+        margin: 0;
+    }
+    img{
+        display: block;
+        vertical-align: top;
+    }
+</style>
+<script>
+    let flag_bw = true;
+    function myclick(event) {
+        let target = event.target.closest('img');
+        if(flag_bw) {
+            target.src = '1.png';
+        } else{
+            target.src = '2.png';
+        }
+        flag_bw = !flag_bw;
+
+
+    }
+</script>
+
+</head>
+<body>
+    <table>
+        <tr>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+        </tr>
+        <tr>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+        </tr>
+        <tr>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+        </tr>
+        <tr>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+        </tr>
+        <tr>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+        </tr>
+        <tr>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+        </tr>
+        <tr>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+        </tr>
+        <tr>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+        </tr>
+        <tr>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+        </tr>
+        <tr>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+            <td onclick ="myclick(event)"><img src="0.png"></td>
+        </tr>
+    </table>
+
+</body>
+</html>
