@@ -28,10 +28,10 @@
 <script>
     let arr2D = [
         [0,0,0,0,0, 0,0,0,0,0],
-        [0,1,1,1,0, 0,0,0,0,0],
-        [0,1,0,1,0, 0,0,0,0,0],
-        [0,1,1,1,0, 0,0,0,0,0],
-        [0,0,1,0,0, 0,0,0,0,0],
+        [0,0,0,0,0, 0,0,0,0,0],
+        [0,0,0,0,0, 0,0,0,0,0],
+        [0,0,0,0,0, 0,0,0,0,0],
+        [0,0,0,0,0, 0,0,0,0,0],
 
         [0,0,0,0,0, 0,0,0,0,0],
         [0,0,0,0,0, 0,0,0,0,0],
@@ -39,6 +39,8 @@
         [0,0,0,0,0, 0,0,0,0,0],
         [0,0,0,0,0, 0,0,0,0,0]
     ]
+
+    let flag_end = false;
 
     function render () {
         // console.log("asdfdf");
@@ -189,7 +191,9 @@
 
     let flag_bw = true;
     function myclick(e) {
-
+        if(flag_end) {
+            return;
+        }
         let target = (e.target.alt).split(',');
         let i = parseInt(target[0]);
         let j = parseInt(target[1]);
@@ -217,14 +221,25 @@
         let le = getLe(i, j, stone);
         let ul = getUl(i, j, stone);
 
-        console.log("up",up);
-        console.log("ur",ur);
-        console.log("ri",ri);
-        console.log("dr",dr);
-        console.log("dw",dw);
-        console.log("dl",dl);
-        console.log("le",le);
-        console.log("ul",ul);
+        let d1 = dl + ur + 1;
+        let d2 = le + ri + 1;
+        let d3 = ul + dr + 1;
+        let d4 = up + dw + 1;
+
+        setTimeout( () => {
+            if(d1 === 5 || d2 === 5 || d3 === 5 || d4 === 5) {
+                if(flag_bw){
+                    alert("백돌 승리");
+                } else{
+                    alert("흑돌 승리");
+                }
+                flag_end = true;
+                fn_reset();
+            }
+        });
+
+
+        console.log(up, ur, ri, dr, dw, dl, le, ul);
 
         render();
 
@@ -243,11 +258,29 @@
         render();
     }
 
+    function fn_reset() {
+        if(flag_end) {
+            for(let i = 0; i < 10; i++) {
+                for(let j = 0; j < 10; j++) {
+                    arr2D[i][j] = 0;
+                }
+            }
+            render();
+        }
+    }
+
+    function fn_restart() {
+
+        flag_end = flase;
+
+    }
+
 </script>
 
 </head>
 <body onload="fn_init()">
-    <a href="javascript:render()">render</a>
+    <a href="javascript:fn_reset()">reset</a>
+    <a href="javascript:fn_restart()">restart</a>
     <table>
         <tr>
             <td><img src="0.png" onclick ="myclick(event)"></td>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>19x19 오목판</title>
+    <style>
+        table {
+            border-spacing: 0;
+            border-collapse: collapse; /* 셀 간격을 없애는 핵심 속성 */
+            margin: 0;
+            padding: 0;
+        }
+        td{
+            padding: 0; /* 셀 내부 간격 제거 */
+            margin: 0;
+            font-size: 0; /* 텍스트 노드로 인한 간격 제거 */
+            line-height: 0; /* 행 높이로 인한 간격 제거 */
+        }
+        tr{
+            padding: 0;
+            margin: 0;
+        }
+        img{
+            display: block;
+            vertical-align: top;
+        }
+        .control-panel {
+            margin: 10px 0;
+        }
+        .control-panel a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+            text-decoration: none;
+            color: #333;
+            border-radius: 4px;
+        }
+        .control-panel a:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+    <script>
+        let arr2D = Array(19).fill().map(() => Array(19).fill(0));
+        let flag_end = false;
+
+        function render() {
+            let imgs = document.getElementsByTagName('img');
+
+            for(let i = 0; i < 19; i++) {
+                for(let j = 0; j < 19; j++) {
+                    imgs[i*19 + j].src = `${arr2D[i][j]}.png`;
+                }
+            }
+        }
+
+        function getUp(i, j, stone) {
+            let ret = 0;
+            try{
+                while(true){
+                    i--;
+                    if(i < 0) return ret;
+                    if(arr2D[i][j] == stone){
+                        ret++;
+                    }else{
+                        return ret;
+                    }
+                }
+            } catch (error) {
+                return ret;
+            }
+        }
+
+        function getUr(i, j, stone) {
+            let ret = 0;
+            try{
+                while(true){
+                    i--;
+                    j++;
+                    if(i < 0 || j >= 19) return ret;
+                    if(arr2D[i][j] == stone){
+                        ret++;
+                    }else{
+                        return ret;
+                    }
+                }
+            } catch (error) {
+                return ret;
+            }
+        }
+
+        function getRi(i, j, stone) {
+            let ret = 0;
+            try{
+                while(true){
+                    j++;
+                    if(j >= 19) return ret;
+                    if(arr2D[i][j] == stone){
+                        ret++;
+                    }else{
+                        return ret;
+                    }
+                }
+            } catch (error) {
+                return ret;
+            }
+        }
+
+        function getDr(i, j, stone) {
+            let ret = 0;
+            try{
+                while(true){
+                    i++;
+                    j++;
+                    if(i >= 19 || j >= 19) return ret;
+                    if(arr2D[i][j] == stone){
+                        ret++;
+                    }else{
+                        return ret;
+                    }
+                }
+            } catch (error) {
+                return ret;
+            }
+        }
+
+        function getDw(i, j, stone) {
+            let ret = 0;
+            try{
+                while(true){
+                    i++;
+                    if(i >= 19) return ret;
+                    if(arr2D[i][j] == stone){
+                        ret++;
+                    }else{
+                        return ret;
+                    }
+                }
+            } catch (error) {
+                return ret;
+            }
+        }
+
+        function getDl(i, j, stone) {
+            let ret = 0;
+            try{
+                while(true){
+                    i++;
+                    j--;
+                    if(i >= 19 || j < 0) return ret;
+                    if(arr2D[i][j] == stone){
+                        ret++;
+                    }else{
+                        return ret;
+                    }
+                }
+            } catch (error) {
+                return ret;
+            }
+        }
+
+        function getLe(i, j, stone) {
+            let ret = 0;
+            try{
+                while(true){
+                    j--;
+                    if(j < 0) return ret;
+                    if(arr2D[i][j] == stone){
+                        ret++;
+                    }else{
+                        return ret;
+                    }
+                }
+            } catch (error) {
+                return ret;
+            }
+        }
+
+        function getUl(i, j, stone) {
+            let ret = 0;
+            try{
+                while(true){
+                    i--;
+                    j--;
+                    if(i < 0 || j < 0) return ret;
+                    if(arr2D[i][j] == stone){
+                        ret++;
+                    }else{
+                        return ret;
+                    }
+                }
+            } catch (error) {
+                return ret;
+            }
+        }
+
+        let flag_bw = true;
+        function myclick(e) {
+            if(flag_end) {
+                return;
+            }
+            let target = (e.target.alt).split(',');
+            let i = parseInt(target[0]);
+            let j = parseInt(target[1]);
+
+            // 돌바꾸기 방지
+            if(arr2D[i][j] > 0){
+                return;
+            }
+            let stone = -1;
+
+            if(flag_bw) {
+                arr2D[i][j] = 1;
+                stone = 1; // 흑돌
+            } else{
+                arr2D[i][j] = 2;
+                stone = 2; // 백돌
+            }
+
+            let up = getUp(i, j, stone);
+            let ur = getUr(i, j, stone);
+            let ri = getRi(i, j, stone);
+            let dr = getDr(i, j, stone);
+            let dw = getDw(i, j, stone);
+            let dl = getDl(i, j, stone);
+            let le = getLe(i, j, stone);
+            let ul = getUl(i, j, stone);
+
+            let d1 = dl + ur + 1;
+            let d2 = le + ri + 1;
+            let d3 = ul + dr + 1;
+            let d4 = up + dw + 1;
+
+            setTimeout( () => {
+                if(d1 === 5 || d2 === 5 || d3 === 5 || d4 === 5) {
+                    if(flag_bw){
+                        alert("백돌 승리");
+                    } else{
+                        alert("흑돌 승리");
+                    }
+                    flag_end = true;
+                }
+            });
+
+            console.log(up, ur, ri, dr, dw, dl, le, ul);
+
+            render();
+
+            flag_bw = !flag_bw;
+        }
+
+        function fn_init() {
+            let imgs2 = document.getElementsByTagName('img');
+
+            for(let i = 0; i < 19; i++) {
+                for(let j = 0; j < 19; j++) {
+                    imgs2[i*19 + j].alt = `${i},${j}`;
+                }
+            }
+            render();
+        }
+
+        function fn_reset() {
+            for(let i = 0; i < 19; i++) {
+                for(let j = 0; j < 19; j++) {
+                    arr2D[i][j] = 0;
+                }
+            }
+            flag_end = false;
+            render();
+        }
+
+        function fn_restart() {
+            flag_end = false;
+        }
+
+    </script>
+
+</head>
+<body onload="fn_init()">
+<div class="control-panel">
+    <a href="javascript:fn_reset()">다시 시작</a>
+    <a href="javascript:fn_restart()">이어서 하기</a>
+</div>
+<table>
+    <tbody id="board">
+    <script>
+        // 19x19 게임판 생성
+        for(let i = 0; i < 19; i++) {
+            document.write('<tr>');
+            for(let j = 0; j < 19; j++) {
+                document.write('<td><img src="0.png" onclick="myclick(event)"></td>');
+            }
+            document.write('</tr>');
+        }
+    </script>
+    </tbody>
+</table>
+</body>
+</html>
