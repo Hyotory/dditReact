@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>EMP LIST 화면</h1>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>사번</th>
+            <th>이름</th>
+            <th>성별</th>
+            <th>주소</th>
+        </tr>
+        </thead>
+        <tbody>
+            <% empList.forEach(item => { %>
+                <tr>
+                    <td>
+                        <a href="/emp_detail.do/<%= item.e_id %>"><%= item.e_id %></a>
+                    </td>
+                    <td><%= item.e_name %></td>
+                    <td><%= item.gen %></td>
+                    <td><%= item.addr %></td>
+                </tr>
+             <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>

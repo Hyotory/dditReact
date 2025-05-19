@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    FORW HTML
+    <p>이름: <%= name %></p>
+    <p>배열:</p>
+    <ul>
+        <% array.forEach(item => { %>
+            <li><%= item %></li>
+        <% }); %>
+    </ul>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>사번</th>
+                <th>이름</th>
+                <th>성별</th>
+                <th>주소</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% myList.forEach(item => { %>
+            <tr>
+                <td><%= item.e_id %></td>
+                <td><%= item.e_name %></td>
+                <td><%= item.gen %></td>
+                <td><%= item.addr %></td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>
