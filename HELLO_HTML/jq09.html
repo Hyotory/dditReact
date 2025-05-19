@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
     #it_first, #it_last {
         width: 50px;
@@ -12,21 +13,21 @@
     }
 </style>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    const mydiv = document.getElementById("mydiv");
-        document.querySelector("#btn").onclick = function() {
-            const start = document.getElementById("it_first").value;
-            const end = document.getElementById("it_last").value;
+    $(document).ready(function () {
+    const mydiv = $("#mydiv");
+        $("#btn").on('click', function() {
+            const start = $("#it_first").val();
+            const end = $("#it_last").val();
             console.log(start, end);
 
             if(end - start < 0) {
                 alert("첫 별 수는 끝 별 수보다 작아야합니다!")
                 return;
             }
-            mydiv.innerHTML = "";
+            mydiv.html('');
             starStack(start, end);
 
-        }
+        })
         function starStack(start, end) {
             let result = '';
             let lines = end - start + 1;
@@ -41,7 +42,7 @@
                 result += "<br/>"
                 starCount++;
             }
-            mydiv.innerHTML += result;
+            mydiv.html(mydiv.html() + result);
             console.log(mydiv);
         }
     })

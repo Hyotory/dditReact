@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
 
 #it {
@@ -17,30 +18,33 @@
 }
 </style>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-const btnCall = document.getElementById("btn_call");
-const btns = document.querySelectorAll(".btn");
-let it = document.getElementById("it");
-console.log(it);
-btns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      console.log("클릭되었습니다." + btn.value);
-      const currentNum = it.value;
-      if(currentNum.length === 3 ) {
-          it.value += "-";
-      }else if(currentNum.length === 8){
-          it.value += "-";
-      }
-      it.value += btn.value;
-    })
-})
-    btnCall.addEventListener("click", () => {
-        if(it.value.length > 0) {
-            alert("Calling..." + it.value);
-        } else{
-           alert("번호를 입력하세요");
-        }
-    })
+$(document).ready(function () {
+
+    const btnCall = $("#btn_call");
+    const btns = $(".btn");
+    let it = $("#it");
+    console.log(it);
+
+    btns.on('click', function() {
+        console.log("클릭되었습니다." + $(this).val());
+
+          const currentNum = it.val();
+
+          if(currentNum.length === 3 ) {
+              it.val(currentNum + "-");
+          }else if(currentNum.length === 8){
+              it.val(currentNum + "-");
+          }
+          it.val(it.val() + $(this).val());
+        })
+
+        btnCall.on("click", function() {
+            if(it.val().length > 0) {
+                alert("Calling..." + it.val());
+            } else{
+               alert("번호를 입력하세요");
+            }
+        })
 })
 </script>
 </head>

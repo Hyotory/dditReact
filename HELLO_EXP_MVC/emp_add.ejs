@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>추가</title>
+</head>
+<body>
+    <form action="/emp_add_act.do" method="post">
+        <table border="1">
+            <tr>
+                <th>사번</th>
+                <td><input type="text" name="e_id" required></td>
+            </tr>
+            <tr>
+                <th>이름</th>
+                <td><input type="text" name="e_name" required></td>
+            </tr>
+            <tr>
+                <th>성별</th>
+                <td><input type="text" name="gen" required></td>
+            </tr>
+            <tr>
+                <th>주소</th>
+                <td><input type="text" name="addr" required ></td>
+            </tr>
+        </table>
+            <button type="submit">저장</button>
+            <button tyupe="button" onclick="location.href='/emp_list.do'">취소</button>
+    </form>
+
+</body>
+</html>

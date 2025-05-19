@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
     #it{
         width: 40px;
@@ -22,7 +23,7 @@
     </tr>
     <tr>
         <td colspan="2">
-            <input type="button" onclick="myclick()" value="맞춰보기">
+            <input type="button" id="btn" value="맞춰보기">
         </td>
     </tr>
     <tr>
@@ -32,112 +33,101 @@
     </tr>
 </table>
 <script>
-    // 1~ 9의 수 중에서 중복 없이 3개 선택
-    // com = 123
-    // my = 321 일 때
-    // 자리수가 같으면 strike, 자리수가 다르면 ball -> 1S2B
-    // 오답 누적 출력하여 정답 유도하기
-    // 3 strike 나오면 정답 처리 -> alert (정답숫자+축하합니다!)
-    let coms = [];
-    let mine = [];
-    let mydiv = document.getElementById("mydiv");
-    console.log(mydiv);
-    let comNum = 0;
-    window.onload = () => {
+    $(document).ready(function(){
+        // 1~ 9의 수 중에서 중복 없이 3개 선택
+        // com = 123
+        // my = 321 일 때
+        // 숫자와 위치가 모두 일치하면 STRIKE
+        // 숫자는 포함되지만 위치가 다르면 BALL
+        // 오답 누적 출력하여 정답 유도하기
+        // 3 strike 나오면 정답 처리 -> alert (정답숫자+축하합니다!)
+        let coms = [];
+        let comNum = '';
+        let mydiv = $("#mydiv");
+        console.log(mydiv);
+
+        initGame();
+
+        function initGame(){
+            coms = [];
             generateComs();
-            mydiv.innerHTML = '';
-    }
-
-    function generateComs() {
-
-        /*
-        let com = "123";
-        야바위법으로 숫자생성
-        let arr9 = [1,2,3,4,5,6,7,8,9];
-        for(let i=0; i<1000; i++){
-            let rnd = partInt(Math.random()*9);
-            let temp = arr9[0];
-            arr9[0] = arr9[rnd];
-            arr9[rnd] = temp;
+            mydiv.html('');
         }
 
-        com = arr9[0] + "" + arr9[1] + "" + arr9[2];
-         */
+        function generateComs() {
+            //야바위법으로 숫자생성
+            let arr9 = [1,2,3,4,5,6,7,8,9];
 
-        const nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-        let firstNum = Math.floor(Math.random() * 9) + 1;
-        console.log(firstNum);
-        coms.push(nums[firstNum].toString());
-        console.log(coms);
-        nums.splice(firstNum, 1);
-        console.log("1번째 자리 숫자 추가 후 nums",nums);
+            for(let i = 0; i < 1000; i++){
+                let rnd = parseInt(Math.random() * 9);
+                let temp = arr9[0];
+                arr9[0] = arr9[rnd];
+                arr9[rnd] = temp;
+            }
 
-        for(let i = 0; i < 2; i++) {
-            let index = Math.floor(Math.random() * nums.length);
-            console.log(index);
-            coms.push(nums[index].toString());
-            nums.splice(index, 1);
-            console.log(`${i+2}번째 자리 숫자 추가 후 nums ${nums}`);
+            comNum = arr9[0] + "" + arr9[1] + "" + arr9[2];
+            coms = comNum.split("");
+            console.log("컴퓨터: ",comNum);
         }
-        console.log("완전체 coms",coms);
-        comNum = coms.join('');
-        console.log(comNum);
-    }
 
-    function myclick() {
-        let my = document.getElementById("it");
-        console.log("my",my);
+        $('#btn').on('click', function () {
+            let my = $("#it");
+            console.log("my",my);
 
-        let myVal = my.value.trim();
-        console.log("myVal",myVal);
+            let myVal = my.val().trim();
+            console.log("myVal",myVal);
 
-        mine = myVal.split('');
-        console.log("mine",mine);
-
-        if(isNaN(Number(myVal)) || myVal.length !== 3 ) {
-            alert(" 정수 3자리만 입력 가능");
-            my.value= "";
-            my.focus();
-            return;
-        }
-        let uniqueTest = new Set(mine);
-        for(let i = 0; i < 2; i++) {
-            if(uniqueTest.size !== 3) {
-                alert("같은 숫자 입력 불가능");
-                my.value= "";
+            if(isNaN(Number(myVal)) || myVal.length !== 3 ) {
+                alert(" 정수 3자리만 입력 가능");
+                my.val("");
                 my.focus();
                 return;
             }
-        }
-        result();
-        my.value= "";
-        my.focus();
-    }
+            let uniqueTest = new Set(myVal.split(''));
+                if(uniqueTest.size !== 3) {
+                    alert("같은 숫자 입력 불가능");
+                    my.val("");
+                    my.focus();
+                    return;
+                }
+
+            result(myVal);
+            my.val("");
+            my.focus();
+        });
 
 
-    function result() {
-        let strike = 0;
-        let ball = 0;
-        for(let i = 0; i < 3; i++) {
-            if(coms[i] === mine[i]) {
-                strike ++;
+        function result(myVal) {
+            let mine = myVal.split('');
+            let strike = 0;
+            let ball = 0;
+
+            for(let i = 0; i < 3; i++) {
+                if(coms[i] === mine[i]) {
+                    // 숫자와 위치가 모두 일치하면 STRIKE
+                    strike ++;
+                }else if (coms.includes(mine[i])) {
+                    // 숫자는 포함되지만 위치가 다르면 BALL
+                    ball ++;
+                }
+            }
+
+            let resLine = `${myVal}: ${strike}S ${ball}B<br>`;
+            mydiv.html(mydiv.html() + resLine);
+
+            // 정답인 경우
+            if(strike ===  3) {
+                setTimeout(() => {
+                    alert(`${comNum} 정답입니다!`);
+
+                    if(confirm("한 번 더?")) {
+                        initGame();
+                    }
+                },);
             }
         }
+    })
 
-        for(let i = 0; i < 3; i++) {
-            if(coms[i] !== mine[i] ) {
-                ball ++;
-            }
-        }
-
-        if(strike ===  3) {
-            setTimeout(() => {
-            alert(`${comNum} 정답입니다!`);
-            }, 1000);
-        }
-        myNum = mine.join('');
-        mydiv.innerHTML += `${myNum} ${strike}S ${ball}B<br>`;
-    }
 
 </script>
 </body>

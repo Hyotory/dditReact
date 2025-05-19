@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
 #it {
     width: 30px;
@@ -12,26 +13,35 @@
 }
 </style>
 <script>
-let ran = parseInt(Math.random()*99)+1;
-function myclick() {
-    let mine = parseInt(Math.random()*99)+1;
-    console.log(mine);
-    const it = document.getElementById("it");
-    const mydiv = document.getElementById("mydiv");
-    console.log(ran);
-    it.value = ran;
+$(document).ready(function () {
+    let ran = parseInt(Math.random()*99)+1;
+    console.log('ran: ',ran);
 
-    let line = "";
-    if(ran === mine) {
-        line += mine + "\t"+ "정답<br/>";
-        alert("정답");
-    } else if(ran > mine) {
-        line += mine+ "\t"+" 내가 작다<br/>";
-    } else {
-        line += mine+ "\t"+" 내가 크다<br/>";
+    function myclick() {
+        let mine = parseInt(Math.random() * 99) + 1;
+        console.log('mine: ',mine);
+
+        const mydiv = $("#mydiv");
+        $('#it').val(ran);
+
+        let line = "";
+        if (ran === mine) {
+            line += mine + "\t" + "정답<br/>";
+            alert("정답");
+
+        } else if (ran > mine) {
+            line += mine + "\t" + " 내가 작다<br/>";
+        } else {
+            line += mine + "\t" + " 내가 크다<br/>";
+        }
+        mydiv.html(mydiv.html() + line);
     }
-    mydiv.innerHTML += line;
-}
+
+    $("#btn").on('click', function () {
+        myclick();
+    })
+});
+
 </script>
 </head>
 <body>
@@ -44,7 +54,7 @@ function myclick() {
     </tr>
     <tr>
         <td colspan="2">
-            <input type="button" onclick="myclick()" value="맞춰보기">
+            <input type="button" id="btn" value="맞춰보기">
         </td>
     </tr>
     <tr>

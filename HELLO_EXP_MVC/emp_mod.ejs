@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="/emp_mod_act.do" method="post">
+        <input type="hidden" name="e_id" value="<%= emp.e_id %>">
+        <table border="1">
+            <tr>
+                <th>사번</th>
+                <td><%= emp.e_id%></td>
+            </tr>
+            <tr>
+                <th>이름</th>
+                <td><input type="text" name="e_name" value="<%= emp.e_name%>"></td>
+            </tr>
+            <tr>
+                <th>성별</th>
+                <td><input type="text" name="gen" value="<%= emp.gen%>"></td>
+            </tr>
+            <tr>
+                <th>주소</th>
+                <td><input type="text" name="addr" value="<%= emp.addr%>"></td>
+            </tr>
+        </table>
+            <button type="submit">저장</button>
+            <button tyupe="button" onclick="location.href='/emp_detail.do/<%= emp.e_id%>'">취소</button>
+    </form>
+
+</body>
+</html>
