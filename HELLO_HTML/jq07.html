@@ -18,11 +18,11 @@ $(document).ready(function () {
     console.log('ran: ',ran);
 
     function myclick() {
-        let mine = parseInt(Math.random() * 99) + 1;
+        let mine = $('#it').val();
         console.log('mine: ',mine);
 
         const mydiv = $("#mydiv");
-        $('#it').val(ran);
+
 
         let line = "";
         if (ran === mine) {

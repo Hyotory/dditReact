@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="/emp_mod_act.do" name="frm" method="post">
+        <input type="hidden" name="e_id" value="<%= emp.e_id %>">
+        <h4>EMP_MOD PAGE</h4>
+        <table border="1">
+            <tr>
+                <th>사번</th>
+                <td><%= emp.e_id%></td>
+            </tr>
+            <tr>
+                <th>이름</th>
+                <td><input type="text" name="e_name" value="<%= emp.e_name%>"></td>
+            </tr>
+            <tr>
+                <th>성별</th>
+                <td><input type="text" name="gen" value="<%= emp.gen%>"></td>
+            </tr>
+            <tr>
+                <th>주소</th>
+                <td><input type="text" name="addr" value="<%= emp.addr%>"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button onclick="fn_mod()">저장</button>
+                    <button type="button" onclick="location.href='/emp_detail.do?e_id=<%= emp.e_id%>'">취소</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+<script>
+    function fn_mod() {
+        document.frm.submit();
+    }
+</script>
+
+</body>
+</html>

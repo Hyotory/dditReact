@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h4>EMP_LIST</h4>
+  <table border="1">
+    <thead>
+    <tr>
+      <th>사번</th>
+      <th>이름</th>
+      <th>성별</th>
+      <th>주소</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% myList.forEach(vo => { %>
+    <tr>
+      <td>
+        <a href="/emp_detail.do?e_id=<%= vo.e_id %>"><%= vo.e_id %></a>
+      </td>
+      <td><%= vo.e_name %></td>
+      <td><%= vo.gen %></td>
+      <td><%= vo.addr %></td>
+    </tr>
+    <% }); %>
+    <tr>
+      <td colspan="4">
+        <div>
+          <button type="button" onclick="location.href='/emp_add.do'">추가</button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>
