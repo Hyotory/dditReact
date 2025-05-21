@@ -13,6 +13,10 @@ app.engine('html', require('ejs').renderFile);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());  // JSON 데이터 파싱
 
+app.get('/', (req, res) => {
+    res.redirect(`/emp_list.do`);
+})
+
 app.get('/emp_list.do', (req, res) => {
     let myList = de.selectList();
     res.render('emp_list.html', {myList: myList});
@@ -46,8 +50,8 @@ app.post('/emp_mod_act.do', (req, res) => {
     });
 });
 
-app.get('/emp_del_act.do', (req, res) => {
-    const e_id = req.query.e_id;
+app.post('/emp_del_act.do', (req, res) => {
+    const e_id = req.body.e_id;
     console.log('e_id: ',e_id);
     let result = de.delete(e_id);
 

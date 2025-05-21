@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 <body>
+  <form action="emp_del_act.do" name="frm" method="post">
+    <input type="hidden" name="e_id" value="<%= vo.e_id%>" >
+  </form>
 <H4>EMP DETAIL VIEW</H4>
 <table border="1">
   <tr>
@@ -39,7 +42,7 @@
   }
 
   function fn_del_act() {
-    location.href='emp_del_act.do?e_id=<%= vo.e_id%>';
+    document.frm.submit();
   }
 </script>
 </body>
