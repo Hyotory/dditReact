@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="emp">
+
+	<select id="selectList" parameterType="shop.ingong.myba.EmpVO" resultType="shop.ingong.myba.EmpVO" >
+		SELECT
+			e_id,
+			e_name,
+			gen,
+			addr
+		FROM
+			emp
+	</select>
+
+	<select id="select" parameterType="shop.ingong.myba.EmpVO" resultType="shop.ingong.myba.EmpVO" >
+		SELECT
+			e_id,
+			e_name,
+			gen,
+			addr
+		FROM
+			emp
+		WHERE
+			e_id = #{e_id}
+	</select>
+	<update id="insert"  parameterType="shop.ingong.myba.EmpVO">
+		INSERT INTO emp
+			(e_id,e_name,gen,addr)
+		VALUES
+			(#{e_id},#{e_name},#{gen},#{addr})
+	</update>
+
+	<update id="update"  parameterType="shop.ingong.myba.EmpVO">
+		UPDATE emp
+		SET
+			e_name = #{e_name},
+			gen = #{gen},
+			addr = #{addr}
+		WHERE
+			e_id = #{e_id}
+	</update>
+
+	<update id="delete"  parameterType="shop.ingong.myba.EmpVO">
+		DELETE FROM emp
+		WHERE
+			e_id = #{e_id}
+	</update>
+
+
+</mapper>
+
