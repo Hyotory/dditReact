@@ -1,15 +1,9 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
+  import Morning from "./lib/Morning.svelte";
 </script>
 
 <main>
 
-
-
-  <div class="card">
-    <Counter />
-  </div>
+  <Morning/>
 
 </main>

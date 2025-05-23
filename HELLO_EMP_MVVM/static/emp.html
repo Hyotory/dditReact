@@ -1,59 +1,690 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <link rel="shortcut icon" href="#" type="image/x-icon">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>직원 관리 시스템</title>
+    <style>
+        /* 전체 페이지 스타일 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* 헤더 스타일 */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* 버튼 스타일 */
+        .btn-container {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        button, input[type="button"] {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            margin: 5px;
+        }
+
+        button:hover, input[type="button"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        button:active, input[type="button"]:active {
+            transform: translateY(0);
+        }
+
+        /* 테이블 스타일 */
+        .table-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background: white;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        tbody tr:hover {
+            background-color: #f8f9ff;
+            transform: scale(1.01);
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        tbody tr:nth-child(even):hover {
+            background-color: #f0f2ff;
+        }
+
+        /* 입력 폼 스타일 */
+        .form-table {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8ebff 100%);
+            border: 2px solid #667eea;
+        }
+
+        .form-table td {
+            padding: 12px 15px;
+            vertical-align: middle;
+        }
+
+        .form-table td:first-child {
+            font-weight: 600;
+            color: #2c3e50;
+            background-color: rgba(102, 126, 234, 0.1);
+            width: 120px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: scale(1.02);
+        }
+
+        /* 빈 데이터 메시지 */
+        .empty-data {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8ebff 100%);
+        }
+
+        /* 로딩 애니메이션 */
+        .loading {
+            text-align: center;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #667eea;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 10px 12px;
+            }
+
+            button, input[type="button"] {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* 추가 효과 */
+        .card-effect {
+            transition: all 0.3s ease;
+        }
+
+        .card-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 성공/오류 메시지 */
+        .success {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        /* 아이콘 효과 */
+        button:hover .icon, input[type="button"]:hover .icon {
+            animation: bounce 0.6s ease;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 60%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-3px); }
+            80% { transform: translateY(-1px); }
+        }
+    </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.all.min.js"></script>
 </head>
 <body>
-    EMP VIEW
-<button onclick="fn_list()"> 데이터 가져오기</button>
-<table border="1px">
-    <thead>
-        <tr>
-            <td>사번</td>
-            <td>이름</td>
-            <td>성별</td>
-            <td>주소</td>
-        </tr>
-    </thead>
-    <tbody id="my_tbody">
-        <tr>
-            <td colspan="4">
-                데이터가 없어유
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="container card-effect">
+    <div class="header">
+        <h2>💼 직원 관리 시스템</h2>
+        <p class="subtitle">Employee Management System</p>
+    </div>
+
+    <div class="btn-container">
+        <button onclick="fn_list()">
+            <span class="icon">📋</span> 데이터 가져오기
+        </button>
+    </div>
+
+    <div class="table-section">
+        <h3 class="section-title">📊 직원 목록</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>사번</th>
+                <th>이름</th>
+                <th>성별</th>
+                <th>주소</th>
+            </tr>
+            </thead>
+            <tbody id="my_tbody">
+            <tr>
+                <td colspan="4" class="empty-data">
+                    <div class="loading">데이터를 불러오는 중입니다</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-section">
+        <h3 class="section-title">✏️ 직원 정보 입력</h3>
+        <table class="form-table card-effect">
+            <tbody>
+            <tr>
+                <td>👤 사번</td>
+                <td>
+                    <input type="text" id="e_id" placeholder="직원 사번을 입력하세요">
+                </td>
+            </tr>
+            <tr>
+                <td>📝 이름</td>
+                <td>
+                    <input type="text" id="e_name" placeholder="직원 이름을 입력하세요">
+                </td>
+            </tr>
+            <tr>
+                <td>⚥ 성별</td>
+                <td>
+                    <input type="text" id="gen" placeholder="성별을 입력하세요 (M/F)">
+                </td>
+            </tr>
+            <tr>
+                <td>🏠 주소</td>
+                <td>
+                    <input type="text" id="addr" placeholder="주소를 입력하세요">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center; padding: 20px;">
+                    <input type="button" value="➕ 직원 추가" onclick="fn_add()">
+                    <input type="button" value="✏️ 수정" onclick="fn_mod()">
+                    <input type="button" value="🗑️ 삭제" onclick="fn_delete()">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <script>
-    async function fn_list() {
-        try {
-            const response = await axios.get('/emp_list.ajax');
-            console.log('서버응답데이터',response.data);
-
-            const { success, empList, message} = response.data;
-
-            const tbody = document.getElementById('my_tbody');
-            tbody.innerHTML = '';
-
-            empList.forEach(emp => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                        <td>${emp.e_id}</td>
-                        <td>${emp.e_name}</td>
-                        <td>${emp.gen}</td>
-                        <td>${emp.addr || ''}</td>
-                    `;
-                tbody.appendChild(row);
-            })
-        }  catch (error) {
-        console.error('목록 조회 오류:', error);
-        document.getElementById('my_tbody').innerHTML =
-            '<tr><td colspan="5">데이터 로드 실패</td></tr>';
+    window.onload = function() {
+        fn_list();
     }
 
+    async function fn_add() {
+        // 입력 값 검증
+        const e_id = document.getElementById('e_id').value.trim();
+        const e_name = document.getElementById('e_name').value.trim();
+        const gen = document.getElementById('gen').value.trim();
+        const addr = document.getElementById('addr').value.trim();
+
+        if (!e_id || !e_name || !gen || !addr) {
+            Swal.fire({
+                icon: 'warning',
+                title: '입력 확인',
+                text: '모든 필드를 입력해주세요.',
+                confirmButtonText: '확인',
+                confirmButtonColor: '#667eea'
+            });
+            return;
+        }
+
+        // 확인 대화상자
+        const result = await Swal.fire({
+            title: '직원 추가',
+            text: '새로운 직원을 추가하시겠습니까?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#667eea',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '추가',
+            cancelButtonText: '취소'
+        });
+
+        if (result.isConfirmed) {
+            try {
+                const res = await axios.post('/emp_add.ajax', {
+                    e_id: e_id,
+                    e_name: e_name,
+                    gen: gen,
+                    addr: addr
+                });
+
+                console.log('서버응답데이터', res.data);
+
+                if (res.data.success) {
+                    await Swal.fire({
+                        icon: 'success',
+                        title: '성공!',
+                        text: '직원이 성공적으로 추가되었습니다.',
+                        confirmButtonText: '확인',
+                        confirmButtonColor: '#667eea',
+                        timer: 2000,
+                        timerProgressBar: true
+                    });
+
+                    fn_list();
+                    clearForm();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '오류 발생',
+                        text: res.data.message || '직원 추가에 실패했습니다.',
+                        confirmButtonText: '확인',
+                        confirmButtonColor: '#667eea'
+                    });
+                }
+            } catch (e) {
+                console.log(e);
+                Swal.fire({
+                    icon: 'error',
+                    title: '서버 오류',
+                    text: '서버와의 통신 중 오류가 발생했습니다.',
+                    confirmButtonText: '확인',
+                    confirmButtonColor: '#667eea'
+                });
+            }
+        }
+    }
+
+    async function fn_mod() {
+        // 입력 값 검증
+        const e_id = document.getElementById('e_id').value.trim();
+        const e_name = document.getElementById('e_name').value.trim();
+        const gen = document.getElementById('gen').value.trim();
+        const addr = document.getElementById('addr').value.trim();
+
+        if (!e_id || !e_name || !gen || !addr) {
+            Swal.fire({
+                icon: 'warning',
+                title: '입력 확인',
+                text: '모든 필드를 입력해주세요.',
+                confirmButtonText: '확인',
+                confirmButtonColor: '#667eea'
+            });
+            return;
+        }
+
+        // 확인 대화상자
+        const result = await Swal.fire({
+            title: '직원 정보 수정',
+            text: '직원 정보를 수정하시겠습니까?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#667eea',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '수정',
+            cancelButtonText: '취소'
+        });
+
+        if (result.isConfirmed) {
+            try {
+                const res = await axios.post('/emp_mod.ajax', {
+                    e_id: e_id,
+                    e_name: e_name,
+                    gen: gen,
+                    addr: addr
+                });
+
+                console.log('서버응답데이터', res.data);
+
+                if (res.data.success) {
+                    await Swal.fire({
+                        icon: 'success',
+                        title: '수정 완료!',
+                        text: '직원 정보가 성공적으로 수정되었습니다.',
+                        confirmButtonText: '확인',
+                        confirmButtonColor: '#667eea',
+                        timer: 2000,
+                        timerProgressBar: true
+                    });
+
+                    fn_list();
+                    clearForm();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '수정 실패',
+                        text: res.data.message || '직원 정보 수정에 실패했습니다.',
+                        confirmButtonText: '확인',
+                        confirmButtonColor: '#667eea'
+                    });
+                }
+            } catch (e) {
+                console.log(e);
+                Swal.fire({
+                    icon: 'error',
+                    title: '서버 오류',
+                    text: '서버와의 통신 중 오류가 발생했습니다.',
+                    confirmButtonText: '확인',
+                    confirmButtonColor: '#667eea'
+                });
+            }
+        }
+    }
+
+    async function fn_delete() {
+        const e_id = document.getElementById('e_id').value.trim();
+
+        if (!e_id) {
+            Swal.fire({
+                icon: 'warning',
+                title: '사번 확인',
+                text: '삭제할 직원의 사번을 입력해주세요.',
+                confirmButtonText: '확인',
+                confirmButtonColor: '#667eea'
+            });
+            return;
+        }
+
+        // 삭제 확인 대화상자
+        const result = await Swal.fire({
+            title: '정말 삭제하시겠습니까?',
+            text: "삭제된 데이터는 복구할 수 없습니다!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#667eea',
+            confirmButtonText: '삭제',
+            cancelButtonText: '취소'
+        });
+
+        if (result.isConfirmed) {
+            try {
+                const res = await axios.post('/emp_del.ajax', {
+                    e_id: e_id
+                });
+
+                if (res.data.success) {
+                    await Swal.fire({
+                        icon: 'success',
+                        title: '삭제 완료!',
+                        text: '직원 정보가 삭제되었습니다.',
+                        confirmButtonText: '확인',
+                        confirmButtonColor: '#667eea',
+                        timer: 2000,
+                        timerProgressBar: true
+                    });
+
+                    fn_list();
+                    clearForm();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '삭제 실패',
+                        text: res.data.message || '직원 정보 삭제에 실패했습니다.',
+                        confirmButtonText: '확인',
+                        confirmButtonColor: '#667eea'
+                    });
+                }
+            } catch (e) {
+                console.log(e);
+                Swal.fire({
+                    icon: 'error',
+                    title: '서버 오류',
+                    text: '서버와의 통신 중 오류가 발생했습니다.',
+                    confirmButtonText: '확인',
+                    confirmButtonColor: '#667eea'
+                });
+            }
+        }
+    }
+
+    async function fn_one(e_id) {
+        console.log("e_id: ", e_id);
+
+        try {
+            const res = await axios.get(`/emp_detail.ajax`, {
+                params: { e_id: e_id }
+            });
+
+            console.log('서버응답데이터', res.data.emp);
+
+            if (!res.data) {
+                throw new Error("서버로부터 응답을 받지 못했습니다");
+            }
+            if (!res.data.success) {
+                throw new Error(res.data.message || '데이터 조회에 실패했습니다.');
+            }
+            if (!res.data.emp) {
+                throw new Error('직원 정보가 없습니다.');
+            }
+
+            const emp = res.data.emp;
+            document.getElementById('e_id').value = emp.e_id;
+            document.getElementById('e_name').value = emp.e_name;
+            document.getElementById('gen').value = emp.gen;
+            document.getElementById('addr').value = emp.addr;
+
+            // 데이터 로드 성공 알림
+            const toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true
+            });
+
+            toast.fire({
+                icon: 'info',
+                title: '직원 정보가 로드되었습니다.'
+            });
+
+        } catch (error) {
+            console.error('상세 데이터 조회 오류:', error);
+            Swal.fire({
+                icon: 'error',
+                title: '데이터 조회 실패',
+                text: error.message || '직원 정보를 불러오는 중 오류가 발생했습니다.',
+                confirmButtonText: '확인',
+                confirmButtonColor: '#667eea'
+            });
+        }
+    }
+
+    async function fn_list() {
+        try {
+            // 로딩 표시
+            document.getElementById('my_tbody').innerHTML = `
+                <tr>
+                    <td colspan="4" class="empty-data">
+                        <div class="loading">데이터를 불러오는 중입니다</div>
+                    </td>
+                </tr>
+            `;
+
+            const response = await axios.get('/emp_list.ajax');
+            console.log('서버응답데이터', response.data);
+
+            const { success, empList, message } = response.data;
+            const tbody = document.getElementById('my_tbody');
+
+            if (success && empList && empList.length > 0) {
+                tbody.innerHTML = '';
+
+                empList.forEach(emp => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><strong><a href="javascript:fn_one('${emp.e_id}')">${emp.e_id}</a></strong></td>
+                        <td>${emp.e_name}</td>
+                        <td><span style="padding: 4px 8px; background: ${emp.gen === 'M' ? '#e3f2fd' : '#fce4ec'}; border-radius: 12px; font-size: 0.9rem;">${emp.gen === 'M' ? '👨 남성' : emp.gen === 'F' ? '👩 여성' : emp.gen}</span></td>
+                        <td>${emp.addr || '<span style="color: #bdc3c7; font-style: italic;">주소 정보 없음</span>'}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            } else {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="empty-data">
+                            📋 등록된 직원이 없습니다<br>
+                            <small style="color: #95a5a6;">새 직원을 추가해보세요!</small>
+                        </td>
+                    </tr>
+                `;
+            }
+        } catch (error) {
+            console.error('목록 조회 오류:', error);
+            document.getElementById('my_tbody').innerHTML = `
+                <tr>
+                    <td colspan="4" class="empty-data error">
+                        ❌ 데이터 로드 실패<br>
+                        <small>서버 연결을 확인해주세요</small>
+                    </td>
+                </tr>
+            `;
+
+            Swal.fire({
+                icon: 'error',
+                title: '데이터 로드 실패',
+                text: '서버에서 직원 목록을 불러올 수 없습니다.',
+                confirmButtonText: '확인',
+                confirmButtonColor: '#667eea'
+            });
+        }
+    }
+
+    // 폼 초기화 함수
+    function clearForm() {
+        document.getElementById('e_id').value = '';
+        document.getElementById('e_name').value = '';
+        document.getElementById('gen').value = '';
+        document.getElementById('addr').value = '';
     }
 </script>
 </body>
