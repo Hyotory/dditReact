@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 
 app.get('/emp_list.do', (req, res) => {
     let myList = de.selectList();
-    res.render('emp_list.html', {myList: myList});
+    res.render('emp.html', {myList: myList});
 })
 
 app.get('/emp_detail.do', (req, res) => {

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h4>AJAX AXIOS</h4>
+<a href="javascript:fn_axios()">axios호출</a>
+
+<script>
+    function fn_axios() {
+        axios({
+            url: '/axios.ajax',
+            method: 'post',
+            responseType: 'json',
+            data: {
+                menu: '짜장'
+            }
+        })
+            .then(function (response) {
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.error('오류 발생:', error);
+            });
+    }
+</script>
+</body>
+</html>

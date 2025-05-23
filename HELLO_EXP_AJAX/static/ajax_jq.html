@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h4> AJAX JQUERY</h4>
+<a href="javascript:fn_ajax()">ajax호출</a>
+
+<script>
+    function fn_ajax() {
+        $.ajax({
+            url: '/jquery.ajax',
+            method: 'post',
+            dataType: 'json',
+            data: {
+                menu: '짜장'
+            },
+            success: function (data) {
+                console.log(data);
+            }
+        })
+    }
+</script>
+</body>
+</html>

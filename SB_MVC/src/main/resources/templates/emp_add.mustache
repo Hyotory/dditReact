@@ -1,0 +1,23 @@
+<!-- emp_add.mustache -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>사원 등록</title>
+    <script>
+        function fn_add() { document.frm.submit(); }
+    </script>
+</head>
+<body>
+<h1>사원 등록</h1>
+<form name="frm" action="/emp_add_act.do" method="post">
+    <table border="1">
+        <tr><th>사번</th><td><input type="text" name="e_id" value="" /></td></tr>
+        <tr><th>이름</th><td><input type="text" name="e_name" value="" /></td></tr>
+        <tr><th>성별</th><td><input type="text" name="gen" value="" /></td></tr>
+        <tr><th>주소</th><td><input type="text" name="addr" value="" /></td></tr>
+        <tr><td colspan="2"><button type="button" onclick="fn_add()">등록</button></td></tr>
+    </table>
+</form>
+</body>
+</html>

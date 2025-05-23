@@ -1,0 +1,36 @@
+<!-- emp_detail.mustache -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>사원 상세</title>
+</head>
+<body>
+<h1>사원 상세</h1>
+<table border="1">
+    <tr>
+        <th>사번</th>
+        <td>{{vo.e_id}}</td>
+    </tr>
+    <tr>
+        <th>이름</th>
+        <td>{{vo.e_name}}</td>
+    </tr>
+    <tr>
+        <th>성별</th>
+        <td>{{vo.gen}}</td>
+    </tr>
+    <tr>
+        <th>주소</th>
+        <td>{{vo.addr}}</td>
+    </tr>
+    <div>
+        <td colspan="2">
+            <a href="/emp_mod.do?e_id={{vo.e_id}}">수정</a> |
+            <a href="/emp_del_act.do?e_id={{vo.e_id}}" onclick="return confirm('삭제하시겠습니까?');">삭제</a> |
+            <a href="/emp_list.do">목록</a>
+        </td>
+    </div>
+</table>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h4>AJAX FETCH</h4>
+<a href="javascript:fn_fetch_async()">FETCH 호출</a>
+
+<script>
+    let a = 0;
+    let b = 0;
+    let c = 0;
+
+    async function fn_fetch_async() {
+        try {
+            const response1 = await fetch('/one.ajax');
+            const data1 = await response1.json();
+            a = data1.cnt;
+            console.log('a:',a);
+
+            const response2 = await fetch('/two.ajax');
+            const data2 = await response2.json();
+            b = data2.cnt;
+            console.log('b:',b);
+
+            c = a + b;
+            console.log('c:',c);
+        } catch (error) {
+            console.error('오류 발생:', error);
+        }
+    }
+</script>
+</body>
+</html>

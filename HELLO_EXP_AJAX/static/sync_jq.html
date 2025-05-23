@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h4> AJAX JQUERY</h4>
+<a href="javascript:fn_ajax()">ajax호출</a>
+
+<script>
+    let a = 0;
+    let b = 0;
+    let c = 0;
+
+    function fn_ajax() {
+        $.ajax({
+            url: '/one.ajax',
+            method: 'get',
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                a = data.cnt;
+                console.log('a: ',a);
+            }
+        });
+        $.ajax({
+            url: '/two.ajax',
+            method: 'get',
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                b = data.cnt;
+                console.log('b: ',b);
+            }
+        });
+        c = a + b;
+        console.log('c: ',c);
+    }
+</script>
+</body>
+</html>

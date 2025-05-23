@@ -1,53 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Employee List</title>
-    <style>
-        table {
-            width: 80%;
-            border-collapse: collapse;
-            margin: 20px auto;
+    <title>EMP LIST</title>
+    <script>
+        function fn_add() {
+            location.href = "emp_add.do";
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-    </style>
+    </script>
 </head>
 <body>
-<h1>Employee List</h1>
-<table>
-    <thead>
+EMP LIST 화면
+<table border="1">
     <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Gender</th>
-        <th>Address</th>
+        <th>사번</th>
+        <th>이름</th>
+        <th>성별</th>
+        <th>주소</th>
     </tr>
-    </thead>
-    <tbody>
     {{#empList}}
         <tr>
-            <td>{{e_id}}</td>
+            <td>
+                <a href="emp_detail.do?e_id={{e_id}}">
+                {{e_id}}
+                </a>
+            </td>
             <td>{{e_name}}</td>
             <td>{{gen}}</td>
             <td>{{addr}}</td>
         </tr>
     {{/empList}}
+
     {{^empList}}
         <tr>
-            <td colspan="4">No employees found</td>
+            <td colspan="4">조회된 사원 정보가 없습니다.</td>
         </tr>
     {{/empList}}
-    </tbody>
+
+    <tr>
+        <td colspan="4">
+            <button onclick="fn_add()">추가</button>
+        </td>
+    </tr>
 </table>
 </body>
 </html>
