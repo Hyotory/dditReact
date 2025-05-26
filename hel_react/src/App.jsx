@@ -1,10 +1,10 @@
-import Morning from "./Morning.jsx";
+import Hol from "./Hol.jsx";
 
 function App() {
 
   return (
     <>
-        <Morning/>
+        <Hol/>
     </>
   )
 }

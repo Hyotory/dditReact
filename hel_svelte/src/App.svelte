@@ -1,9 +1,9 @@
 <script>
-  import Morning from "./lib/Morning.svelte";
+  import Hol from "./lib/Hol.svelte";
 </script>
 
 <main>
 
-  <Morning/>
+  <Hol/>
 
 </main>

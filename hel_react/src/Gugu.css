@@ -1,0 +1,82 @@
+.gugu-container {
+    padding: 24px;
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.gugu-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 24px;
+    color: #374151;
+}
+
+.gugu-table {
+    width: 100%;
+}
+
+.gugu-label {
+    padding: 8px 12px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.gugu-input-cell {
+    padding: 8px 12px;
+}
+
+input[type="text"] {
+    width: 40px;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    outline: none;
+}
+
+input[type="text"]:focus {
+    border-color: #3b82f6;
+}
+
+.gugu-button-cell {
+    padding: 12px 0;
+}
+
+.gugu-button {
+    width: 100%;
+    padding: 10px 16px;
+    background-color: #3b82f6;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.gugu-button:hover {
+    background-color: #2563eb;
+}
+
+.gugu-result-cell {
+    padding: 12px 0;
+}
+
+.gugu-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    background-color: #f9fafb;
+    font-family: monospace;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+}
+
+.gugu-textarea:focus {
+    border-color: #3b82f6;
+}

@@ -1,5 +1,4 @@
 import {useState} from 'react'
-import './App.css'
 
 function Morning() {
     const [msg, setMsg] = useState('Good Morning')

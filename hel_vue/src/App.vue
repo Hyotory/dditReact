@@ -1,10 +1,9 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import Morning from "./components/Morning.vue";
+import Hol from "./components/Hol.vue";
 </script>
 
 <template>
-  <Morning/>
+  <Hol/>
 </template>
 
 <style scoped>
