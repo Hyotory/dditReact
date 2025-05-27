@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">기본 제목</title>
+</head>
+<body>
+    <h1 th:text="${message}">기본 메시지</h1>
+    <p>현재 시간: <span th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+    
+    <!-- 반복문 예제 -->
+    <div th:if="${items != null}">
+        <h2>아이템 목록:</h2>
+        <ul>
+            <li th:each="item : ${items}" th:text="${item}"></li>
+        </ul>
+    </div>
+    
+    <!-- 조건문 예제 -->
+    <div th:if="${showMessage}">
+        <p>조건부 메시지가 표시됩니다!</p>
+    </div>
+    
+    <hr>
+    <p>Thymeleaf 템플릿 엔진을 사용한 페이지입니다.</p>
+</body>
+</html>
