@@ -1,6 +1,7 @@
-package shop.ingong.myba;
+package shop.ingong.myba.mapper;
 
 import org.apache.ibatis.annotations.*;
+import shop.ingong.myba.dto.MemDto;
 
 import java.util.List;
 

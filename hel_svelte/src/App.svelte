@@ -1,9 +1,8 @@
 <script>
-  import Hol from "./lib/Hol.svelte";
+    import UpDw from "./lib/UpDw.svelte";
+
 </script>
 
 <main>
-
-  <Hol/>
-
+  <UpDw/>
 </main>

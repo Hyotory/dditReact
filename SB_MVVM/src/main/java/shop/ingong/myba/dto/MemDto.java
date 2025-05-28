@@ -1,4 +1,4 @@
-package shop.ingong.myba;
+package shop.ingong.myba.dto;
 
 import lombok.Getter;
 import lombok.Setter;

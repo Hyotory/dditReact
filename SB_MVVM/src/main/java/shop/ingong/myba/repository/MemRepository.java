@@ -1,8 +1,10 @@
-package shop.ingong.myba;
+package shop.ingong.myba.repository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+import shop.ingong.myba.dto.MemDto;
+import shop.ingong.myba.mapper.MemMapper;
 
 import java.util.List;
 import java.util.Optional;
