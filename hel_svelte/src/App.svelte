@@ -1,8 +1,8 @@
 <script>
-    import UpDw from "./lib/UpDw.svelte";
+    import Strike from "./lib/Strike.svelte";
 
 </script>
 
 <main>
-  <UpDw/>
+  <Strike/>
 </main>
