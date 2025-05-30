@@ -1,8 +1,11 @@
 import { useState } from 'react'
 
-function MyProp({ alt = '' }) {
+function MyProp({src, alt}) {
     return (
-        <div>속성: {alt}</div>
+        <div>
+            <div>속성: {alt}</div>
+            <img src={src} />
+        </div>
     )
 }
 

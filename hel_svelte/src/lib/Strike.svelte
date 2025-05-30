@@ -9,7 +9,7 @@
 
     let arr9 = [1,2,3,4,5,6,7,8,9];
     for(let i=0; i<1000; i++) {
-      let rnd = parseInt(Math.random() * 9);
+      let rnd = parseInt((Math.random() * 9).toString());
       let temp = arr9[0];
       arr9[0] = arr9[rnd];
       arr9[rnd] = temp;

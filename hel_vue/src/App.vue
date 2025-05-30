@@ -1,9 +1,19 @@
 <script setup>
 import { ref } from 'vue'
-import MyFocus from "./components/MyFocus.vue";
-import MyProp from "./components/MyProp.vue";
+import MyInput from "./components/MyInput.vue";
+
+let obj = ref(null);
+let obj_value =ref(null);
+
+const myclick= () => {
+  obj.value.value= "bye"
+  obj_value.value.setValue("bye");
+}
+
 </script>
 
 <template>
-  <MyProp alt="1.1"/>
+  <input type="text" value="hello" ref="obj"/><br/>
+  <MyInput value="hallo" ref="obj_value"/><br/>
+  <button @click="myclick">CHANGE TEXT</button><br/>
 </template>
