@@ -1,15 +1,15 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import "./Lotto.css"
 
-function Lotto() {
+const Lotto: React.FC = () => {
     // useState로 상태 관리 (React의 핵심!)
-    const [lottNumbers, setLottNumbers] = useState([0, 0, 0, 0, 0, 0]);
+    const [lottNumbers, setLottNumbers] = useState<number[]>([0, 0, 0, 0, 0, 0]);
 
     const myclick = () => {
-        let lottArr = [];
+        let lottArr: number[] = [];
 
         while (lottArr.length < 6) {
-            let lottNumber = Math.floor(Math.random() * 45) + 1;
+            let lottNumber: number = Math.floor(Math.random() * 45) + 1;
 
             if (!lottArr.includes(lottNumber)) {
                 lottArr.push(lottNumber);
@@ -17,8 +17,8 @@ function Lotto() {
         }
 
         // bubbleSort 함수
-        function bubbleSort(arr) {
-            let temp = 0;
+        function bubbleSort(arr: number[]): number[] {
+            let temp: number = 0;
             for (let i = 0; i < arr.length - 1; i++) {
                 for (let j = 1; j < arr.length - i; j++) {
                     if (arr[j] < arr[j - 1]) {

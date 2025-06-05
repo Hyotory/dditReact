@@ -1,0 +1,13 @@
+    table, tr, td {
+        border: 1px solid darkolivegreen;
+        text-align: center;
+    }
+
+    input[type='text'] {
+        width: 50px;
+    }
+
+    a {
+        color: blue;
+        text-decoration: underline;
+    }

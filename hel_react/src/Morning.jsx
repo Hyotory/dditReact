@@ -1,7 +1,7 @@
-import {useState} from 'react'
+import React, {useState} from 'react'
 
-function Morning() {
-    const [msg, setMsg] = useState('Good Morning')
+const Morning: React.FC = () => {
+    const [msg, setMsg] = useState<string>('Good Morning')
 
     const myClick = () => {
         setMsg('Good Evening')

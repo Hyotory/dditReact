@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<button onclick="myclick()">CLICK</button>
+<script>
+    function myclick() {
+        let obj = {"m_id" : "1", "m_name" : "2"}
+        let obj2 = {...obj, ['m_id']: 3}
+
+        let list =  [
+            {'m_id': 1, 'm_name': 1},
+            {'m_id': 2, 'm_name': 2},
+        ]
+
+
+        let list2 = JSON.parse(JSON.stringify(list));
+        list[0]['m_id'] = 5;
+
+        console.log('list',list);
+        console.log('list2',list2);
+
+
+        obj2.m_id = 3
+
+        console.log(obj);
+        console.log(obj2);
+    }
+
+</script>
+</body>
+</html>
