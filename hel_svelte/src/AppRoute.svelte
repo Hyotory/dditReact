@@ -2,16 +2,13 @@
     import { Router, Link, Route } from "svelte-routing";
     import RouteHome from "./lib/RouteHome.svelte";
     import RouteAbout from './lib/RouteAbout.svelte';
-    import EmpList from "./lib/EmpList.svelte";
 
 </script>
 
 <Router>
     <Link to="/">홈</Link>
     <Link to="/about">소개</Link>
-    <Link to="/emp_list.do">사원관리</Link>
     <br />
     <Route path="/" > <RouteHome/> </Route>
     <Route path="/about"  >  <RouteAbout/> </Route>
-    <Route path="emp_list.do"><EmpList/></Route>
 </Router>

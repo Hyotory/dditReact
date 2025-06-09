@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemDto {
+public class EmpDto {
     private int eId;
     private String eName;
     private String gen;
