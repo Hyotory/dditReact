@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 관리</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+
+        function fn_del(){
+            if(confirm("삭제할거임?")){
+                if(confirm("진짜 삭제할거임?")){
+                    let m_id = {
+                        m_id: document.getElementById("m_id").value
+                    };
+
+                    axios.post('/api/mem/delete', m_id)
+                        .then(function (resp) {
+                            if(resp.data.cnt > 0) {
+                                alert("삭제 ㅊㅊ");
+                                document.getElementById("m_id").value = "";
+                                document.getElementById("m_name").value = "";
+                                document.getElementById("tel").value = "";
+                                document.getElementById("email").value = "";
+                                fn_list();
+                            } else {
+                                alert("데이터 없스");
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                            alert("오류~~~~");
+                        });
+                }
+            }
+        }
+
+        function fn_mod(){
+            let vo = {
+                m_id: parseInt(document.getElementById("m_id").value),
+                m_name: document.getElementById("m_name").value,
+                tel: document.getElementById("tel").value,
+                email: document.getElementById("email").value
+            };
+
+            if(!vo.m_id || !vo.m_name || !vo.tel || !vo.email) {
+                alert("모든 필드를 입력해주세요.");
+                return;
+            }
+
+            axios.post('/api/mem/update', vo)
+                .then(function (resp) {
+                    if(resp.data.cnt > 0) {
+                        alert("수정 ㅊㅊ");
+                        document.getElementById("m_id").value = "";
+                        document.getElementById("m_name").value = "";
+                        document.getElementById("tel").value = "";
+                        document.getElementById("email").value = "";
+                        fn_list();
+                    } else {
+                        alert("데이터 없스");
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert("오류~~~~");
+                });
+        }
+
+        function fn_add(){
+            let vo = {
+                m_id: parseInt(document.getElementById("m_id").value),
+                m_name: document.getElementById("m_name").value,
+                tel: document.getElementById("tel").value,
+                email: document.getElementById("email").value
+            };
+
+            if(!vo.m_id || !vo.m_name || !vo.tel || !vo.email) {
+                alert("모든 필드를 입력해주세요.");
+                return;
+            }
+
+            axios.post('/api/mem/add', vo)
+                .then(function (resp) {
+                    if(resp.data.success) {
+                        alert("추가 성공 ㅊㅊ");
+                        document.getElementById("m_id").value = "";
+                        document.getElementById("m_name").value = "";
+                        document.getElementById("tel").value = "";
+                        document.getElementById("email").value = "";
+                        fn_list();
+                    } else {
+                        alert(resp.data.message || "추가 실패 ㅠ");
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert("오류~~~~");
+                });
+        }
+
+        function fn_one(m_id){
+            console.log("m_id : ",m_id);
+            axios.get('/api/mem/detail', {
+                params: {
+                    m_id:m_id
+                }
+            }).then(function (resp){
+
+                let mem = resp.data.member;
+
+                document.getElementById("m_id").value = mem.m_id;
+                document.getElementById("m_name").value = mem.m_name;
+                document.getElementById("tel").value = mem.tel;
+                document.getElementById("email").value = mem.email;
+            })
+        }
+
+        function fn_list(){
+            axios.get('/api/mem/list').then(function (resp) {
+                let obj_tbody = document.getElementById("my_tbody");
+                let list = resp.data.list;
+
+                let txt = ``;
+
+                for(let i=0; i<list.length; i++){
+                    let vo = list[i];
+                    let m_id = vo.m_id;
+                    let m_name = vo.m_name;
+                    let tel = vo.tel;
+                    let email = vo.email;
+                    txt += `
+                        <tr>
+                            <td><a href='javascript:fn_one(${m_id})'>${m_id}</a></td>
+                            <td>${m_name}</td>
+                            <td>${tel}</td>
+                            <td>${email}</td>
+                        </tr>
+                    `;
+                }
+                obj_tbody.innerHTML = txt;
+            })
+        }
+
+    </script>
+</head>
+<body onload="fn_list();">
+<h1>MEM 화면</h1>
+
+<table border="1px">
+    <thead>
+    <tr>
+        <th>회원ID</th>
+        <th>이름</th>
+        <th>전화번호</th>
+        <th>이메일</th>
+    </tr>
+    </thead>
+    <tbody id="my_tbody">
+    <tr>
+        <td colspan="4" style="text-align: center;">
+            데이터를 로딩 중입니다...
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table border="1px">
+    <tbody>
+    <tr>
+        <td>회원ID</td>
+        <td>
+            <input type="number" id="m_id" />
+        </td>
+    </tr>
+    <tr>
+        <td>이름</td>
+        <td>
+            <input type="text" id="m_name" />
+        </td>
+    </tr>
+    <tr>
+        <td>전화번호</td>
+        <td>
+            <input type="text" id="tel" />
+        </td>
+    </tr>
+    <tr>
+        <td>이메일</td>
+        <td>
+            <input type="email" id="email" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="button" value="추가" onclick="fn_add()" />
+            <input type="button" value="수정" onclick="fn_mod()" />
+            <input type="button" value="삭제" onclick="fn_del()" />
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

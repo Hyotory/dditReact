@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="emp">
+
+	<select id="selectList" resultType="EmpVO">
+		SELECT
+			e_id,
+			e_name,
+			gen,
+			addr
+		FROM
+			emp
+		ORDER BY e_id
+	</select>
+
+	<select id="select" parameterType="EmpVO" resultType="EmpVO">
+		SELECT
+			e_id,
+			e_name,
+			gen,
+			addr
+		FROM
+			emp
+		WHERE
+			e_id = #{e_id}
+	</select>
+
+	<insert id="insert" parameterType="EmpVO">
+		INSERT INTO emp
+			(e_id, e_name, gen, addr)
+		VALUES
+			(E_SEQ.NEXTVAL, #{e_name}, #{gen}, #{addr})
+	</insert>
+
+	<update id="update" parameterType="EmpVO">
+		UPDATE emp
+		SET
+			e_name = #{e_name},
+			gen = #{gen},
+			addr = #{addr}
+		WHERE
+			e_id = #{e_id}
+	</update>
+
+	<delete id="delete" parameterType="EmpVO">
+		DELETE FROM emp
+		WHERE
+			e_id = #{e_id}
+	</delete>
+
+</mapper>

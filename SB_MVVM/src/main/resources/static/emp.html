@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>직원 관리</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+
+        function fn_del(){
+            if(confirm("삭제할거임?")){
+                if(confirm("진짜 삭제할거임?")){
+                    let e_id = {
+                        e_id: document.getElementById("e_id").value
+                    };
+
+                    axios.post('/api/emp/delete', e_id)
+                        .then(function (resp) {
+                            if(resp.data.cnt > 0) {
+                                alert("삭제 ㅊㅊ");
+                                document.getElementById("e_id").value = "";
+                                document.getElementById("e_name").value = "";
+                                document.getElementById("gen").value = "";
+                                document.getElementById("addr").value = "";
+                                fn_list();
+                            } else {
+                                alert("데이터 없스");
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                            alert("오류~~~~");
+                        });
+                }
+            }
+        }
+
+        function fn_mod(){
+            let vo = {
+                e_id: parseInt(document.getElementById("e_id").value),
+                e_name: document.getElementById("e_name").value,
+                gen: document.getElementById("gen").value,
+                addr: document.getElementById("addr").value
+            };
+
+            if(!vo.e_id || !vo.e_name || !vo.gen || !vo.addr) {
+                alert("모든 필드를 입력해주세요.");
+                return;
+            }
+
+            axios.post('/api/emp/update', vo)
+                .then(function (resp) {
+                    if(resp.data.cnt > 0) {
+                        alert("수정 ㅊㅊ");
+                        document.getElementById("e_id").value = "";
+                        document.getElementById("e_name").value = "";
+                        document.getElementById("gen").value = "";
+                        document.getElementById("addr").value = "";
+                        fn_list();
+                    } else {
+                        alert("데이터 없스");
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert("오류~~~~");
+                });
+        }
+
+        function fn_add(){
+            let vo = {
+                e_name: document.getElementById("e_name").value,
+                gen: document.getElementById("gen").value,
+                addr: document.getElementById("addr").value
+            };
+
+            if(!vo.e_name || !vo.gen || !vo.addr) {
+                alert("이름, 성별, 주소를 모두 입력해주세요.");
+                return;
+            }
+
+            axios.post('/api/emp/add', vo)
+                .then(function (resp) {
+                    if(resp.data.success) {
+                        alert("추가 성공 ㅊㅊ");
+                        document.getElementById("e_id").value = "";
+                        document.getElementById("e_name").value = "";
+                        document.getElementById("gen").value = "";
+                        document.getElementById("addr").value = "";
+                        fn_list();
+                    } else {
+                        alert(resp.data.message || "추가 실패 ㅠ");
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert("오류~~~~");
+                });
+        }
+
+        function fn_one(e_id){
+            console.log("e_id : ",e_id);
+            axios.get('/api/emp/detail', {
+                params: {
+                    e_id:e_id
+                }
+            }).then(function (resp){
+
+                let emp = resp.data.emp;
+
+                document.getElementById("e_id").value = emp.e_id;
+                document.getElementById("e_name").value = emp.e_name;
+                document.getElementById("gen").value = emp.gen;
+                document.getElementById("addr").value = emp.addr;
+            })
+        }
+
+        function fn_list(){
+            axios.get('/api/emp/list').then(function (resp) {
+                let obj_tbody = document.getElementById("my_tbody");
+                let list = resp.data.list;
+
+                let txt = ``;
+
+                for(let i=0; i<list.length; i++){
+                    let vo = list[i];
+                    let e_id = vo.e_id;
+                    let e_name = vo.e_name;
+                    let gen = vo.gen;
+                    let addr = vo.addr;
+                    txt += `
+                        <tr>
+                            <td><a href='javascript:fn_one(${e_id})'>${e_id}</a></td>
+                            <td>${e_name}</td>
+                            <td>${gen}</td>
+                            <td>${addr}</td>
+                        </tr>
+                    `;
+                }
+                obj_tbody.innerHTML = txt;
+            })
+        }
+
+    </script>
+</head>
+<body onload="fn_list();">
+<h1>EMP 화면</h1>
+
+<table border="1px">
+    <thead>
+    <tr>
+        <th>직원ID</th>
+        <th>이름</th>
+        <th>성별</th>
+        <th>주소</th>
+    </tr>
+    </thead>
+    <tbody id="my_tbody">
+    <tr>
+        <td colspan="4" style="text-align: center;">
+            데이터를 로딩 중입니다...
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table border="1px">
+    <tbody>
+    <tr>
+        <td>직원ID</td>
+        <td>
+            <input type="number" id="e_id" readonly style="background-color: #f0f0f0;" />
+            <small>(자동 생성)</small>
+        </td>
+    </tr>
+    <tr>
+        <td>이름</td>
+        <td>
+            <input type="text" id="e_name" />
+        </td>
+    </tr>
+    <tr>
+        <td>성별</td>
+        <td>
+            <select id="gen">
+                <option value="">선택하세요</option>
+                <option value="M">남성</option>
+                <option value="F">여성</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>주소</td>
+        <td>
+            <input type="text" id="addr" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="button" value="추가" onclick="fn_add()" />
+            <input type="button" value="수정" onclick="fn_mod()" />
+            <input type="button" value="삭제" onclick="fn_del()" />
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

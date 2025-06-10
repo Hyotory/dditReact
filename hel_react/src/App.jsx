@@ -1,22 +1,34 @@
-import {useRef, useState} from 'react';
-import MyInput from "./MyInput.jsx";
+// App.js
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import RouteHome from "./RouteHome.jsx";
+import RouteAbout from "./RouteAbout.jsx";
+import EmpList from "./EmpList.jsx";
+import EmpDetail from "./EmpDetail.jsx";
+import EmpAdd from "./EmpAdd.jsx";
+import EmpMod from "./EmpMod.jsx";
+
 
 function App() {
-    const [obj, setObj] = useState("HAAHAHA");
-    const [obj_value, setObj_value] = useState("LALALALAL");
-
-    const myclick = () => {
-        setObj("GOGOGGOGOO");
-        setObj_value("NONONONONOO");
-    }
-
     return (
-        <>
-            <input type="text"  value={obj}/>
-            <MyInput value={obj_value} />
-            <button onClick={myclick}>Uraraaa</button>
-        </>
-
+        <Router>
+            <div className="App">
+                <nav>
+                    <Link to="/">홈</Link>
+                    <Link to="/about">소개</Link>
+                    <Link to="/emp_list.do">사원관리</Link>
+                </nav>
+                <br />
+                <Routes>
+                    <Route path="/" element={<RouteHome />} />
+                    <Route path="/about" element={<RouteAbout />} />
+                    <Route path="/emp_list.do" element={<EmpList />} />
+                    <Route path="/emp_detail.do" element={<EmpDetail />} />
+                    <Route path="/emp_add.do" element={<EmpAdd />} />
+                    <Route path="/emp_mod.do" element={<EmpMod />} />
+                </Routes>
+            </div>
+        </Router>
     );
 }
 
